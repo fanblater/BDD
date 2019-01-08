@@ -2,11 +2,8 @@
 Base de donnée CDA 2019
 
 # jour 1 : commande Linux
-<<<<<<< HEAD
+
 ## aller dans la maison de root
-=======
-# aller dans la maison de root
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
     cd /root
     # editer les prefs du compte root pour le bashrc
     nano .bashrc
@@ -19,130 +16,130 @@ Base de donnée CDA 2019
     # j'installe les utilitaires usuels du systeme
        apt install nmap zip dnsutils net-tools tzdata lynx ssh sudo
 
-<<<<<<< HEAD
+
    ## je telecharge la presque dernière version de webmin
    wget http://prdownloads.sourceforge.net/webadmin/webmin_1.890_all.deb
+
    ## installation du paquet en local
    dpkg -i webmin_1.890_all.deb 
+
    ## je fini l'install via apt
    apt -f install
+
    ## installation de samba pour le partage windows
    apt install winbind samba
-
    cd /etc/
-   ##je. verifie et modifie au cas ou les dns
+
+   ##je verifie et modifie au cas ou les dns
    nano resolv.conf
+
    ##je modifie la ligne de resolution hosts pour rajouter wins
    nano nsswitch.conf 
-   ##je verifie l'heure
-=======
-   # je telecharge la presque dernière version de webmin
+   
+   ## je telecharge la presque dernière version de webmin
    wget http://prdownloads.sourceforge.net/webadmin/webmin_1.890_all.deb
-   # installation du paquet en local
+   
+   ## installation du paquet en local
    dpkg -i webmin_1.890_all.deb 
-   # je fini l'install via apt
-   apt -f install
-   # installation de samba pour le partage windows
-   apt install winbind samba
 
+   ## je fini l'install via apt
+   apt -f install
+
+   ## installation de samba pour le partage windows
+   apt install winbind samba
    cd /etc/
-   #je. verifie et modifie au cas ou les dns
+
+   ## je verifie et modifie au cas ou les dns
    nano resolv.conf
-   #je modifie la ligne de resolution hosts pour rajouter wins
+   
+   ## je modifie la ligne de resolution hosts pour rajouter wins
    nano nsswitch.conf 
-   #je verifie l'heure
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+
+   ## je verifie l'heure
    date
-   #config du fuseau
+
+   ## config du fuseau
    dpkg-reconfigure tzdata
 
-<<<<<<< HEAD
-   ##install d'apache 2.4
+
+   ## install d'apache 2.4
    apt install apache2
-   ##activation du module SSL
+
+   ## activation du module SSL
    a2enmod ssl
    a2ensite default-ssl
-   ##relancer le service ( systemctl restart apache2)
+   
+   ## relancer le service ( systemctl restart apache2)
    service apache2 restart
-   ##generation du certificat auto signé pour 10 ans
+   
+   ## generation du certificat auto signé pour 10 ans
    openssl req $@ -new -x509 -days 3560 -nodes -out /etc/apache2/apache.pem -keyout /etc/apache2/apache.pem
-   ##activation des modules populaires
-=======
-   #install d'apache 2.4
+   
+
+   ## install d'apache 2.4
    apt install apache2
-   #activation du module SSL
+   
+   ## activation du module SSL
    a2enmod ssl
    a2ensite default-ssl
-   #relancer le service ( systemctl restart apache2)
+   
+   ## relancer le service ( systemctl restart apache2)
    service apache2 restart
-   #generation du certificat auto signé pour 10 ans
+   
+   ## generation du certificat auto signé pour 10 ans
    openssl req $@ -new -x509 -days 3560 -nodes -out /etc/apache2/apache.pem -keyout /etc/apache2/apache.pem
-   #activation des modules populaires
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+   
+   ## activation des modules populaires
+
    a2enmod rewrite
    a2enmod redirect
    a2enmod curl
    a2enmod headers
-<<<<<<< HEAD
+
    ## écriture du nouveau certif ssl dans la conf apache
-=======
-   # écriture du nouveau certif ssl dans la conf apache
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+
    cd sites-available/
    nano default-ssl.conf 
    service apache2 restart
 
-<<<<<<< HEAD
-   ##changement du documentroot
-=======
-   #changement du documentroot
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+   ## changement du documentroot
+
    nano apache2.conf
    service apache2 restart
    nano 000-default.conf
 
-<<<<<<< HEAD
+   ##installation de mysql en lieu et place de maria
+
    ## changement recursif de propriétaire et c'est apache le nouveau proprio
    chown -R www-data:www-data /home/user/www
    usermod -a -G www-data user
 
-   ##installation de mysql en lieu et place de maria
-=======
-   # changement recursif de propriétaire et c'est apache le nouveau proprio
-   chown -R www-data:www-data /home/user/www
-   usermod -a -G www-data user
+   ## installation de mysql en lieu et place de maria
 
-   #installation de mysql en lieu et place de maria
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
    echo -e "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7\ndeb-src http://repo.mysql.com/apt/debian/ stretch mysql-5.7" > /etc/apt/sources.list.d/mysql.list
    wget -O /tmp/RPM-GPG-KEY-mysql https://repo.mysql.com/RPM-GPG-KEY-mysql
    apt-key add /tmp/RPM-GPG-KEY-mysql
    apt update
    apt install mysql-server
 
-<<<<<<< HEAD
-   ##edition du fichier de configuration mysql pour binder toutes les IF
-=======
-   #edition du fichier de configuration mysql pour binder toutes les IF
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+   ## edition du fichier de configuration mysql pour binder toutes les IF
+
    /etc/mysql
    nmap 127.0.0.1
    nmap 192.168.30.120
    cd mysql.conf.d/
    nano mysqld.cnf 
-<<<<<<< HEAD
+
    ## relance des services
    service mysql restart
    nmap 192.168.1.1
 
-   ##installation php7
-=======
-   # relance des services
+   ## relance des services
    service mysql restart
    nmap 192.168.1.14
 
-   #installation php7
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+   ## installation php7
+
    apt install php
    apt install php-curl
    apt install php-gd
@@ -154,32 +151,21 @@ Base de donnée CDA 2019
    apt install php-tokeniser
    apt install php-exif
    
-<<<<<<< HEAD
-   ##break&fun time
-=======
-   #break&fun time
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+
+   ## break&fun time
+
    apt install bsdgames
    cd /usr/games
    l
    ./hangman
 
-  
-<<<<<<< HEAD
-  ##install de PMA
-  apt install phpmyadmin
-  ## changement récursif des droits pour le dossier www pour ftp et samba
-  chmod -R 775 /home/user/www
- 
- ##install du service ftp 
-=======
   #install de PMA
   apt install phpmyadmin
   # changement récursif des droits pour le dossier www pour ftp et samba
   chmod -R 775 /home/user/www
  
  #install du service ftp 
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+
    apt install vsftpd
    cd /etc/
    nano vsftpd.conf 
@@ -188,12 +174,9 @@ Base de donnée CDA 2019
    service vsftpd restart
    nmap 127.0.0.1
    service vsftpd status
-  
-<<<<<<< HEAD
-   ##install et config de samba
-=======
-   #install et config de samba
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+
+## install et config de samba
+
    apt install samba
    cd /etc/samba
    mv smb.conf smb.bak
@@ -203,11 +186,8 @@ Base de donnée CDA 2019
    service smbd restart
    testparm
 
-<<<<<<< HEAD
-   ##install PHP7.2
-=======
-   #install PHP7.2
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+## install PHP7.2
+
 
   apt-get -y install apt-transport-https lsb-release ca-certificates
   wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -228,11 +208,9 @@ Base de donnée CDA 2019
   service apache2 stop
   service apache2 start
 
-<<<<<<< HEAD
-  ##installation de binutils pour le dev
-=======
-  #installation de binutils pour le dev
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+
+  ## installation de binutils pour le dev
+
   apt install composer
   apt install npm
   apt install curl
@@ -241,11 +219,8 @@ Base de donnée CDA 2019
   apt install nodes
   apt install screen
 
-<<<<<<< HEAD
-  ##installation nodejs
-=======
-  #installation nodejs
->>>>>>> 6ec4205d583ea55762b2a76bdc87d952ebb3033e
+  ## installation nodejs
+
   cd /root
   wget https://nodejs.org/dist/v8.12.0/node-v8.12.0-linux-x64.tar.xz
   tar zxvf node-v8.12.0-linux-x64.tar.xz 
@@ -257,7 +232,7 @@ Base de donnée CDA 2019
 
   history >history.txt
 
-<<<<<<< HEAD
+
 # Jour 2 : Modelisation BDD
 
 ## Types de champs
