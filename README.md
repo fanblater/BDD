@@ -234,6 +234,62 @@ Base de donnée CDA 2019
     Referenced table => table satellite
     Par default le detail est bon sinon cocher la bonne case.
 
+# Projet BDD - Chocolaterie
+*Pour le projet nous avons choisi de créer une base de donnée sur une chocolaterie * voir dossier projet/ chocolat.mwb
+
+## Création d'un TRIGGER pour la décrémentation du stock coffret
+
+    UPDATE stock_coffret as c1 SET quantite = ((SELECT quantite FROM (SELECT * FROM stock_coffret) as c2 WHERE id_coffret = new.id_coffret) - new.quantite) where id_coffret = new.id_coffret and id_magasin = (select id_magasin from commande where id = new.id_commande)
+
+## 10 Requêtes 
+
+### Combien de fois le golden ticket à t'il été gagné et ressortir les numéros de série des tickets gagnants ?
+
+    SELECT count(numero_de_serie ) as nombre, numero_de_serie FROM golden_ticket INNER JOIN lien_goldenticket_coffret ON  golden_ticket.id = id_goldenticket group by numero_de_serie;
+
+
+### Quel est le stock de chaque magasin ?
+    
+    SELECT SUM(quantite), id_magasin FROM stock_chocolat GROUP BY id_magasin;
+
+
+### Combien de client on acheté plus d'un coffret ?
+    
+    SELECT COUNT(id) AS nombre FROM commande join lien_coffret_commande ON commande.id = id_commande WHERE quantite > 1 GROUP BY id_client;
+
+### Combien de client posséde une carte de fidélité ? Et en poucentage ?
+    
+    SELECT COUNT(id_client) FROM carte_de_fidelite WHERE active;
+    
+    SELECT COUNT(id_client)  /(SELECT COUNT(id) FROM client)* 100 FROM carte_de_fidelite WHERE active;
+
+### Quels fournisseurs fournissent les chocolat de type fruit enrobé ?
+
+    SELECT nom FROM fournisseur AS fo WHERE fo.id IN (SELECT DISTINCT(id_fournisseur) FROM lien_chocolat_fournisseur WHERE id_chocolat IN(SELECT c.id FROM chocolat AS c LEFT JOIN format AS f ON c.id_format = f.id WHERE f.nom = "fruit enrobé"));
+
+### Quel ville posséde le plus de client avec une carte de fidélité active ?
+    
+    SELECT DISTINCT(COUNT(ville)), ville FROM adresse 
+    JOIN carte_de_fidelite ON adresse.id = id_adresse 
+    WHERE active
+    GROUP BY ville DESC
+
+### Quel coffret est le plus vendu ?
+    
+    SELECT id_coffret, COUNT(*) quantite FROM lien_coffret_commande GROUP BY id_coffret ORDER BY quantite DESC LIMIT 1;
+
+
+### Quel nom de domaine est le plus populaire dans les adresse mail des cartes de fidélité ?
+    
+    SELECT DISTINCT(substring_index(email, '@' , -1))AS fai , COUNT(substring_index(email, '@' , -1)) AS quantite FROM carte_de_fidelite GROUP BY fai ORDER BY quantite DESC LIMIT 1;
+
+### quels sont les 2 coffrets les moins vendu ?
+    
+    SELECT id_coffret, SUM(quantite) AS total FROM lien_coffret_commande WHERE id_coffret IN (SELECT DISTINCT(id_coffret)FROM lien_coffret_commande) GROUP BY id_coffret ORDER BY total ASC LIMIT 2;
+
+### quel est le chocolat le plus cher du prix au grammes ?
+    
+    SELECT nom FROM chocolat WHERE (prix/poids) = (SELECT MAX(prix/poids) FROM chocolat);
 
 
 
