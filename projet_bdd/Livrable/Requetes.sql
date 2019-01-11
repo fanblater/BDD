@@ -34,9 +34,9 @@ WHERE fo.id IN
 SELECT DISTINCT(COUNT(ville)), ville FROM adresse 
 JOIN carte_de_fidelite ON adresse.id = id_adresse 
 WHERE active
-GROUP BY ville DESC
+GROUP BY ville DESC;
 
---Quel coffret est le plus vendu ?
+-- Quel coffret est le plus vendu ?
 SELECT id_coffret, count(*) quantite FROM lien_coffret_commande GROUP BY id_coffret order by quantite DESC LIMIT 1;
 
 -- Quel nom de domaine est le plus populaire dans les adresses mail des cartes de fidélité ?

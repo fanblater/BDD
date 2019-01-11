@@ -370,7 +370,7 @@
 
 # Projet BDD - Chocolaterie
 
-**Pour le projet nous avons choisi de créer une base de donnée sur une chocolaterie** voir dossier projet/ chocolat.mwb
+**Pour le projet nous avons choisi de créer une base de donnée sur une chocolaterie** voir dossier projet_bdd/livrable/chocolat.mwb
 
 ## Création d'un TRIGGER pour la décrémentation du stock coffret
 
